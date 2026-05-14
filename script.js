@@ -101,15 +101,24 @@ function loadFallback(){
 //  APPLY DATA TO PAGE
 // =====================================================
 function applyBanners(){
-  allBanners.forEach((b,i)=>{
-    const bgEl = document.getElementById('heroSlide'+i);
-    if(bgEl) bgEl.style.backgroundImage = `url('${b.image_url}')`;
-    const eyeEl = document.getElementById('h'+i+'eyebrow');
-    if(eyeEl) eyeEl.textContent = b.eyebrow||'';
-    const titleEl = document.getElementById('h'+i+'title');
-    if(titleEl) titleEl.innerHTML = b.title.replace(' ','\n').replace('\n','<br>');
-    const subEl = document.getElementById('h'+i+'sub');
-    if(subEl) subEl.textContent = b.subtitle||'';
+  if(!allBanners || allBanners.length === 0) return;
+  
+  allBanners.forEach((b, i) => {
+    if(i > 2) return;
+    
+    const bgEl = document.getElementById('heroSlide' + i);
+    if(bgEl && b.image_url) bgEl.style.backgroundImage = `url('${b.image_url}')`;
+    
+    const eyeEl = document.getElementById('h' + i + 'eyebrow');
+    if(eyeEl) eyeEl.textContent = b.eyebrow || '';
+    
+    const titleEl = document.getElementById('h' + i + 'title');
+    if(titleEl && b.title) {
+        titleEl.innerHTML = b.title.replace(/\s/g, '<br>');
+    }
+    
+    const subEl = document.getElementById('h' + i + 'sub');
+    if(subEl) subEl.textContent = b.subtitle || '';
   });
   renderHeroDots();
 }
