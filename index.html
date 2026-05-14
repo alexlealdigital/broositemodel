@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEVE SIGNATURE</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- ===== LOADING ===== -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <p>Carregando…</p>
+</div>
+
+<!-- ===== ANNOUNCEMENT BAR ===== -->
+<div class="announcement" id="announcementBar">
+    Quem treina com a Leve Signature usa Moda fitness de verdade, sem pagar a mais!
+</div>
+
+<!-- ===== HEADER ===== -->
+<header id="mainHeader">
+  <div class="header-inner">
+    <a class="logo" onclick="showPage('home')">Leve<span>.</span></a>
+    <nav>
+      <a onclick="showPage('feminino')">Feminino</a>
+      <a onclick="showPage('masculino')">Masculino</a>
+      <a onclick="showPage('acessorios')">Acessórios</a>      
+      <a onclick="showPage('home')" style="color:var(--terracota)">Últimas Peças ✦</a>
+    </nav>
+    <div class="header-icons">
+      <button class="icon-btn" onclick="toggleSearch()" title="Buscar">🔍</button>
+      <button class="icon-btn" onclick="showLoginAdmin()" title="Minha conta">👤</button>
+      <button class="icon-btn" title="Lista de desejos">🤍</button>
+      <button class="icon-btn" onclick="openCart()" title="Carrinho">
+        🛍<span class="cart-count" id="cartCount" style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PÁGINAS ===== -->
+<main>
+
+<!-- HOME PAGE -->
+<div class="page-view active" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-slide active">
+      <div class="hero-bg" id="heroSlide0"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow" id="h0eyebrow">Nova Coleção 2025</p>
+        <h1 class="hero-title" id="h0title">Movimento<br>é Poesia</h1>
+        <p class="hero-sub" id="h0sub">Yoga · Pilates · Lifestyle</p>
+        <button class="btn btn-white" onclick="showPage('feminino')">Explorar Coleção</button>
+      </div>
+    </div>
+    <div class="hero-slide">
+      <div class="hero-bg" id="heroSlide1"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow" id="h1eyebrow">Best Sellers</p>
+        <h1 class="hero-title" id="h1title">Conforto<br>sem Limites</h1>
+        <p class="hero-sub" id="h1sub">Os favoritos da temporada</p>
+        <button class="btn btn-white" onclick="showPage('feminino')">Shop Agora</button>
+      </div>
+    </div>
+    <div class="hero-slide">
+      <div class="hero-bg" id="heroSlide2"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow" id="h2eyebrow">Aloversary Sale</p>
+        <h1 class="hero-title" id="h2title">Até 40%<br>de Desconto</h1>
+        <p class="hero-sub" id="h2sub">Oferta por tempo limitado</p>
+        <button class="btn btn-white" onclick="showPage('feminino')">Ver Ofertas</button>
+      </div>
+    </div>
+    <div class="hero-dots" id="heroDots"></div>
+  </section>
+
+  <!-- Categorias -->
+  <div class="cat-row">
+    <div class="cat-item" onclick="showPage('feminino')">
+      <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="Feminino" loading="lazy">
+      <div class="overlay"></div><div class="label">Feminino</div>
+    </div>
+    <div class="cat-item" onclick="showPage('masculino')">
+      <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="Masculino" loading="lazy">
+      <div class="overlay"></div><div class="label">Masculino</div>
+    </div>
+    <div class="cat-item" onclick="showPage('acessorios')">
+      <img src="https://images.unsplash.com/photo-1602827114685-5a7b2cf0c97f?w=600&q=80" alt="Acessórios" loading="lazy">
+      <div class="overlay"></div><div class="label">Acessórios</div>
+    </div>
+    <div class="cat-item" onclick="showPage('calcados')">
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Calçados" loading="lazy">
+      <div class="overlay"></div><div class="label">Calçados</div>
+    </div>
+  </div>
+
+  <!-- Best Sellers -->
+  <div class="section">
+    <div class="section-header">
+      <p class="section-eyebrow">Mais Vendidos</p>
+      <h2 class="section-title">Best Sellers</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="products-grid" id="bestSellersGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--cinza)"><div class="spinner"></div></div>
+    </div>
+  </div>
+
+  <!-- Banner Editorial -->
+  <div class="editorial-banner">
+    <div class="editorial-img">
+      <img id="editorialImg" src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&q=80" alt="Editorial">
+    </div>
+    <div class="editorial-text">
+      <p class="eyebrow" id="editorialEyebrow">Nossa História</p>
+      <h2 id="editorialTitle">Presente no Momento, Conectada com o Corpo</h2>
+      <p id="editorialText">Cada peça da Leve é criada com intenção — para te ajudar a estar presente em cada movimento, cada respiração, cada conquista.</p>
+      <button class="btn btn-dark" onclick="showPage('feminino')">Explorar</button>
+    </div>
+  </div>
+
+  <!-- Full Banner -->
+  <div class="full-banner">
+    <div class="bg" id="fullBannerBg" style="background-image:url('https://images.unsplash.com/photo-1536922246289-88c42f957773?w=1600&q=80')"></div>
+    <div class="overlay"></div>
+    <div class="content">
+      <h2 id="fullBannerTitle">Aloversary</h2>
+      <p id="fullBannerSub">Celebre com até 40% off em toda a coleção</p>
+      <button class="btn btn-white" onclick="showPage('feminino')">Shop Agora</button>
+    </div>
+  </div>
+
+  <!-- Trending -->
+  <div class="section">
+    <div class="section-header">
+      <p class="section-eyebrow">Em Alta</p>
+      <h2 class="section-title">Trending Now</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="products-grid" id="trendingGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:40px;"><div class="spinner"></div></div>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="newsletter">
+    <p class="eyebrow" id="nlEyebrow">Fique por dentro</p>
+    <h2 id="nlTitle">Exclusividades para Você</h2>
+    <p id="nlText">Seja a primeira a saber sobre novidades, promoções e conteúdos exclusivos</p>
+    <div class="nl-form">
+      <input type="email" id="nlEmail" placeholder="Seu e-mail">
+      <button onclick="subscribeNewsletter()">Assinar</button>
+    </div>
+  </div>
+
+</div><!-- /page-home -->
+
+<!-- CATEGORY PAGE -->
+<div class="page-view" id="page-category">
+  <div class="page-hero-small">
+    <h1 id="catPageTitle">Coleção</h1>
+    <p id="catPageSub">Carregando…</p>
+  </div>
+  <div class="filter-bar">
+    <span class="filter-label">Filtrar:</span>
+    <button class="filter-chip active" onclick="filterCat(this,'all')">Todos</button>
+    <button class="filter-chip" onclick="filterCat(this,'Leggings')">Leggings</button>
+    <button class="filter-chip" onclick="filterCat(this,'Tops')">Tops</button>
+    <button class="filter-chip" onclick="filterCat(this,'Macacão')">Macacão</button>
+    <button class="filter-chip" onclick="filterCat(this,'Jaquetas')">Jaquetas</button>
+    <select class="sort-select" onchange="sortCat(this.value)">
+      <option value="default">Ordenar: Relevância</option>
+      <option value="asc">Menor Preço</option>
+      <option value="desc">Maior Preço</option>
+    </select>
+  </div>
+  <div class="section">
+    <div class="products-grid" id="categoryGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:40px;"><div class="spinner"></div></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="font-family:var(--ff-display);font-size:22px;font-weight:300;letter-spacing:6px;color:white;margin-bottom:20px;">Leve<span style="color:var(--terracota)">.</span></div>
+      <p id="footerAbout">Elevando o padrão do activewear com peças que se movem com você.</p>
+      <div class="social" style="margin-top:24px;display:flex;gap:16px;">
+        <a class="social-link" href="#" title="Instagram">📷</a>
+        <a class="social-link" href="#" title="TikTok">🎵</a>
+        <a class="social-link" href="#" title="YouTube">▶</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Ajuda</h4>
+      <a>Central de Ajuda</a><a>Rastrear Pedido</a><a>Trocas e Devoluções</a><a>Guia de Tamanhos</a>
+    </div>
+    <div class="footer-col">
+      <h4>Minha Conta</h4>
+      <a onclick="showLoginAdmin()">Login</a><a>Criar Conta</a><a>Histórico de Pedidos</a>
+    </div>
+    <div class="footer-col">
+      <h4>A Leve</h4>
+      <a>Quem Somos</a><a>Blog</a><a>Lojas</a>
+      <a onclick="showLoginAdmin()" style="color:var(--terracota)">Área Admin ↗</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 LEVE YOGA BRASIL</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:10px;color:rgba(255,255,255,.3);">
+      <span class="sync-dot" id="syncDot"></span>
+      <span id="syncLabel">Supabase</span>
+    </span>
+  </div>
+</footer>
+
+<!-- ===== CARRINHO ===== -->
+<div class="cart-backdrop" id="cartBackdrop" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>Sua Sacola</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total"><span>Total</span><span id="cartTotal">R$ 0</span></div>
+    <button class="cart-checkout-btn" onclick="checkout()">Finalizar Compra</button>
+  </div>
+</div>
+
+<!-- ===== MODAL PRODUTO ===== -->
+<div class="modal-backdrop" id="productModal">
+  <div class="product-modal">
+    <div class="modal-gallery">
+      <img id="modalImg" src="" alt="">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-info">
+      <p class="modal-cat" id="modalCat"></p>
+      <h2 class="modal-name" id="modalName"></h2>
+      <p class="modal-price" id="modalPrice"></p>
+      <p class="modal-label">Cor</p>
+      <div class="color-select" id="modalColors"></div>
+      <p class="modal-label">Tamanho</p>
+      <div class="size-grid" id="modalSizes"></div>
+      <button class="add-cart-btn" onclick="addToCartFromModal()">Adicionar à Sacola</button>
+      <button class="wishlist-btn">♡ Lista de Desejos</button>
+      <p class="modal-desc" id="modalDesc"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LOGIN ===== -->
+<div class="login-screen" id="loginScreen">
+  <button class="login-back" onclick="closeLogin()">← Voltar</button>
+  <div class="login-box">
+    <div class="login-logo">Leve<span>.</span></div>
+    <p class="login-subtitle">Área Administrativa</p>
+    <div class="login-form">
+      <div class="form-row">
+        <label>E-mail</label>
+        <input type="email" id="loginEmail" placeholder="admin@leve.com">
+      </div>
+      <div class="form-row">
+        <label>Senha</label>
+        <input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="login-btn" id="loginBtn" onclick="doLogin()">Entrar</button>
+      <p class="login-error" id="loginError"></p>
+    </div>
+    <p style="font-size:11px;color:var(--cinza);margin-top:20px;">
+      Cadastre o admin em: Supabase → Authentication → Users
+    </p>
+  </div>
+</div>
+
+<!-- ===== ADMIN ===== -->
+<div class="admin-container" id="adminContainer">
+  <div class="admin-header">
+    <div class="admin-logo">Leve<span>.</span> Admin</div>
+    <div class="admin-nav">
+      <button class="admin-tab active" onclick="switchPanel('dashboard',this)">Dashboard</button>
+      <button class="admin-tab" onclick="switchPanel('products',this)">Produtos</button>
+      <button class="admin-tab" onclick="switchPanel('categories',this)">Categorias</button>
+      <button class="admin-tab" onclick="switchPanel('banners',this)">Banners</button>
+      <button class="admin-tab" onclick="switchPanel('texts',this)">Textos</button>
+      <button class="admin-tab" onclick="switchPanel('orders',this)">Pedidos</button>
+    </div>
+    <button class="admin-exit" onclick="exitAdmin()">← Ver Site</button>
+  </div>
+  <div class="admin-body">
+
+    <!-- DASHBOARD -->
+    <div class="admin-panel active" id="panel-dashboard">
+      <h1 class="admin-panel-title">Dashboard</h1>
+      <p class="admin-panel-sub">Visão geral — dados do Supabase em tempo real</p>
+      <div class="stats-row">
+        <div class="stat-card"><div class="label">Receita Total</div><div class="value" id="statReceita">—</div><div class="change">Todos os pedidos</div></div>
+        <div class="stat-card"><div class="label">Pedidos</div><div class="value" id="statPedidos">—</div><div class="change">No banco de dados</div></div>
+        <div class="stat-card"><div class="label">Produtos Ativos</div><div class="value" id="statProdutos">—</div><div class="change">No catálogo</div></div>
+        <div class="stat-card"><div class="label">Inscritos</div><div class="value" id="statNewsletter">—</div><div class="change">Newsletter</div></div>
+      </div>
+      <div style="background:white;border:1px solid var(--borda);padding:24px;">
+        <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cinza);font-weight:600;margin-bottom:20px;">Últimos Pedidos</p>
+        <div id="lastOrders" style="font-size:12px;color:var(--cinza);"></div>
+      </div>
+    </div>
+
+    <!-- PRODUTOS -->
+    <div class="admin-panel" id="panel-products">
+      <h1 class="admin-panel-title">Gerenciar Produtos</h1>
+      <p class="admin-panel-sub">Adicione, edite ou remova produtos — sincronizado com Supabase</p>
+      <div class="admin-toolbar">
+        <input class="admin-search" type="text" placeholder="🔍  Buscar produto..." oninput="filterAdminProducts(this.value)">
+        <button class="admin-add-btn" onclick="openProductEditor()">+ Novo Produto</button>
+      </div>
+      <table class="admin-table">
+        <thead><tr><th>Imagem</th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Status</th><th>Ações</th></tr></thead>
+        <tbody id="productsTableBody"></tbody>
+      </table>
+    </div>
+
+    
+    <div class="admin-panel" id="panel-categories">
+      <h1 class="admin-panel-title">Gerenciar Categorias</h1>
+      <p class="admin-panel-sub">Adicione ou remova categorias do site</p>
+      <div class="admin-toolbar">
+        <input class="admin-search" type="text" placeholder="🔍  Buscar categoria..." oninput="filterAdminCategories(this.value)">
+        <button class="admin-add-btn" onclick="openCategoryEditor()">+ Nova Categoria</button>
+      </div>
+      <table class="admin-table">
+        <thead><tr><th>Nome</th><th>Slug</th><th>Ações</th></tr></thead>
+        <tbody id="categoriesTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- BANNERS -->
+    <div class="admin-panel" id="panel-banners">
+      <h1 class="admin-panel-title">Gerenciar Banners</h1>
+      <p class="admin-panel-sub">Edite os slides do hero — imagens via upload ou URL</p>
+      <div class="banners-grid" id="bannersGrid"></div>
+    </div>
+
+    <!-- TEXTOS -->
+    <div class="admin-panel" id="panel-texts">
+      <h1 class="admin-panel-title">Gerenciar Textos</h1>
+      <p class="admin-panel-sub">Edite os textos do site sem tocar em código — salvo no Supabase</p>
+      <div id="textsContainer"></div>
+    </div>
+
+    <!-- PEDIDOS -->
+    <div class="admin-panel" id="panel-orders">
+      <h1 class="admin-panel-title">Pedidos</h1>
+      <p class="admin-panel-sub">Histórico de pedidos registrados no Supabase</p>
+      <table class="admin-table">
+        <thead><tr><th>Nº</th><th>Data</th><th>Cliente</th><th>Itens</th><th>Total</th><th>Status</th></tr></thead>
+        <tbody id="ordersTableBody"></tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== EDITOR PRODUTO ===== -->
+<div class="editor-backdrop" id="editorBackdrop">
+  <div class="editor-modal">
+    <div class="editor-header">
+      <h3 id="editorTitle">Novo Produto</h3>
+      <button class="editor-close" onclick="closeEditor()">✕</button>
+    </div>
+    <div class="editor-body">
+
+      <!-- Upload de imagem -->
+      <div class="form-row">
+        <label>Imagem do Produto</label>
+        <div class="upload-area" id="uploadArea"
+             ondragover="event.preventDefault();this.classList.add('drag-over')"
+             ondragleave="this.classList.remove('drag-over')"
+             ondrop="handleDrop(event)">
+          <input type="file" accept="image/*" multiple onchange="handleFileSelect(event)" id="fileInput">
+          <span class="upload-icon">📸</span>
+          <p>Arraste uma imagem ou clique para selecionar</p>
+          <small>JPG, PNG, WEBP · Máx. 5MB · Upload direto para o Supabase Storage</small>
+          <div class="upload-progress" id="uploadProgress">
+            <div class="bar" id="uploadBar"></div>
+          </div>
+        </div>
+        <div class="img-preview-grid" id="imgPreviewGrid"></div>
+
+        <div class="or-divider">ou</div>
+
+        <div class="form-row" style="margin-bottom:0">
+          <label>URL Externa da Imagem</label>
+          <input type="text" id="editorImgUrl" placeholder="https://..." oninput="addUrlPreview(this.value)">
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-row">
+          <label>Nome do Produto</label>
+          <input type="text" id="editorName" placeholder="Ex: Legging High Waist">
+        </div>
+        <div class="form-row">
+          <label>Categoria</label>
+          <select id="editorCat"></select>
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row">
+          <label>Preço (R$)</label>
+          <input type="number" id="editorPrice" placeholder="299.00" step="0.01">
+        </div>
+        <div class="form-row">
+          <label>Preço Antigo (opcional)</label>
+          <input type="number" id="editorOldPrice" placeholder="399.00" step="0.01">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Descrição</label>
+        <textarea id="editorDesc" placeholder="Descreva o produto..."></textarea>
+      </div>
+      <div class="form-row">
+          <label>Cores</label>
+          <div id="colorPickerContainer" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;"></div>
+          <div style="display:flex; gap:8px;">
+            <input type="color" id="colorInput" style="width:40px; height:40px; padding:0; border:1px solid var(--borda); cursor:pointer;">
+            <button type="button" class="admin-add-btn" onclick="addColorFromPicker()" style="padding:0 15px;">Adicionar Cor</button>
+          </div>
+          <input type="hidden" id="editorColors">
+        </div>
+        <div class="form-row">
+          <label>Tamanhos Disponíveis</label>
+          <div id="sizeCheckboxContainer" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap:10px; padding:10px; border:1px solid var(--borda); background:#f9f9f9;">
+            <label style="display:flex; align-items:center; gap:5px; font-size:12px;"><input type="checkbox" name="size" value="PP"> PP</label>
+            <label style="display:flex; align-items:center; gap:5px; font-size:12px;"><input type="checkbox" name="size" value="P"> P</label>
+            <label style="display:flex; align-items:center; gap:5px; font-size:12px;"><input type="checkbox" name="size" value="M"> M</label>
+            <label style="display:flex; align-items:center; gap:5px; font-size:12px;"><input type="checkbox" name="size" value="G"> G</label>
+            <label style="display:flex; align-items:center; gap:5px; font-size:12px;"><input type="checkbox" name="size" value="GG"> GG</label>
+            <label style="display:flex; align-items:center; gap:5px; font-size:12px;"><input type="checkbox" name="size" value="U"> Único</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Status</label>
+          <select id="editorStatus"><option value="active">Ativo</option><option value="draft">Rascunho</option></select>
+        </div>
+      <div class="form-grid-2">
+        <div class="form-row">
+          <label><input type="checkbox" id="editorFeatured"> Best Seller (Destaque)</label>
+        </div>
+        <div class="form-row">
+          <label><input type="checkbox" id="editorTrending"> Trending Now</label>
+        </div>
+      </div>
+    </div>
+    <div class="editor-footer">
+      <button class="editor-cancel" onclick="closeEditor()">Cancelar</button>
+      <button class="editor-save" id="editorSaveBtn" onclick="saveProduct()">
+        <span id="editorSaveTxt">Salvar no Supabase</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div class="editor-backdrop" id="categoryEditorBackdrop">
+  <div class="editor-modal" style="max-width:400px">
+    <div class="editor-header">
+      <h3 id="categoryEditorTitle">Nova Categoria</h3>
+      <button class="editor-close" onclick="closeCategoryEditor()">✕</button>
+    </div>
+    <div class="editor-body">
+      <div class="form-row">
+        <label>Nome da Categoria</label>
+        <input type="text" id="categoryName" placeholder="Ex: Leggings">
+      </div>
+    </div>
+    <div class="editor-footer">
+      <button class="editor-cancel" onclick="closeCategoryEditor()">Cancelar</button>
+      <button class="editor-save" onclick="saveCategory()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EDITOR BANNER ===== -->
+<div class="editor-backdrop" id="bannerEditorBackdrop">
+  <div class="editor-modal">
+    <div class="editor-header">
+      <h3 id="bannerEditorTitle">Editar Banner</h3>
+      <button class="editor-close" onclick="closeBannerEditor()">✕</button>
+    </div>
+    <div class="editor-body">
+      <div class="form-row">
+        <label>Imagem do Banner</label>
+        <div class="upload-area" id="bannerUploadArea"
+             ondragover="event.preventDefault();this.classList.add('drag-over')"
+             ondragleave="this.classList.remove('drag-over')"
+             ondrop="handleBannerDrop(event)">
+          <input type="file" accept="image/*" onchange="handleBannerFile(event)" id="bannerFileInput">
+          <span class="upload-icon">🖼️</span>
+          <p>Arraste ou clique para selecionar a imagem do banner</p>
+          <small>JPG, PNG · Recomendado: 1600×900px · Upload para Supabase Storage</small>
+          <div class="upload-progress" id="bannerUploadProgress">
+            <div class="bar" id="bannerUploadBar"></div>
+          </div>
+        </div>
+        <div id="bannerImgPreview" style="margin-top:8px;display:none;">
+          <img id="bannerImgPreviewImg" src="" alt="" style="width:100%;aspect-ratio:16/9;object-fit:cover;">
+        </div>
+        <div class="or-divider">ou</div>
+        <div class="form-row" style="margin-bottom:0">
+          <label>URL Externa</label>
+          <input type="text" id="bannerImgUrl" placeholder="https://..." oninput="previewBannerUrl(this.value)">
+        </div>
+      </div>
+      <div class="form-row"><label>Eyebrow (texto pequeno)</label><input type="text" id="bannerEyebrow" placeholder="Ex: Nova Coleção 2025"></div>
+      <div class="form-row"><label>Título Principal</label><input type="text" id="bannerTitle" placeholder="Ex: Movimento é Poesia"></div>
+      <div class="form-row"><label>Subtítulo</label><input type="text" id="bannerSub" placeholder="Ex: Yoga · Pilates · Lifestyle"></div>
+      <input type="hidden" id="bannerEditId">
+      <input type="hidden" id="bannerEditSlide">
+    </div>
+    <div class="editor-footer">
+      <button class="editor-cancel" onclick="closeBannerEditor()">Cancelar</button>
+      <button class="editor-save" id="bannerSaveBtn" onclick="saveBanner()">
+        <span id="bannerSaveTxt">Salvar Banner</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="api.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
