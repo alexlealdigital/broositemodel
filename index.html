@@ -6,6 +6,9 @@
 <title>LEVE SIGNATURE</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="apple-touch-icon" href="https://nlxyvqrahgyqgpwjpfpe.supabase.co/storage/v1/object/public/site-assets/icon-192.png">
 </head>
 <body>
 
@@ -543,5 +546,16 @@
 
 <script src="api.js"></script>
 <script src="script.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker registrado!', reg))
+        .catch(err => console.log('Erro ao registrar Service Worker', err));
+    });
+  }
+</script>
+
 </body>
 </html>
